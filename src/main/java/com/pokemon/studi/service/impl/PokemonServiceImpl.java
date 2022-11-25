@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Service
 public class PokemonServiceImpl implements PokemonService {
 
-    private static List<Pokemon> maListe = new ArrayList<>();
+    private static final List<Pokemon> maListe = new ArrayList<>();
 
     @Override
     public List<Pokemon> getAllPokemon() {
