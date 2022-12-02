@@ -2,3 +2,12 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:postgresql://localhost:3306/dbname
+    username: toto
+    password: toto
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true

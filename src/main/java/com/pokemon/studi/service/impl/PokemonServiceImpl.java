@@ -1,43 +1,47 @@
 package com.pokemon.studi.service.impl;
 
 import com.pokemon.studi.pojo.Pokemon;
+import com.pokemon.studi.repository.PokemonRepository;
 import com.pokemon.studi.service.PokemonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class PokemonServiceImpl implements PokemonService {
 
-    private static final List<Pokemon> maListe = new ArrayList<>();
+    @Autowired
+    private PokemonRepository pokemonRepository;
 
     @Override
     public List<Pokemon> getAllPokemon() {
-        return maListe;
+        return pokemonRepository.findAll();
     }
 
     @Override
-    public List<Pokemon> getAllPokemonByName(String name) {
-        return maListe.stream()
-                .filter(pokemon -> pokemon.getSurname().equals(name))
-                .collect(Collectors.toList());
+    public Pokemon getPokemonById(Long id) {
+        Optional<Pokemon> pokemonOptional = pokemonRepository.findById(id);
+        return pokemonOptional.orElse(null);
     }
 
     @Override
-    public void updatePokemon(String pokemonName, Pokemon pokemon) {
-        this.deletePokemon(pokemonName);
-        maListe.add(pokemon);
+    public void updatePokemon(Long id, Pokemon pokemon) {
+        this.deletePokemon(id);
+        pokemonRepository.save(pokemon);
     }
 
     @Override
     public void createPokemon(Pokemon pokemon) {
-        maListe.add(pokemon);
+        pokemonRepository.save(pokemon);
     }
 
     @Override
-    public void deletePokemon(String name) {
-        maListe.removeIf(monPokemon -> monPokemon.getSurname().equals(name));
+    public void deletePokemon(Long id) {
+        pokemonRepository.deleteById(id);
     }
 }
