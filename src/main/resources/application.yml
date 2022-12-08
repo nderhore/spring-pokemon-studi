@@ -2,3 +2,12 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:postgresql://postgresql-nathand59.alwaysdata.net/nathand59_pokedex
+    username: nathand59_spring
+    password: toto&59560
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true

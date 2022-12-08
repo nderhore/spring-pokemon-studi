@@ -11,7 +11,6 @@ import java.util.List;
 @RequestMapping(ApiRegistration.REST_PREFIX + ApiRegistration.REST_POKEMON)
 public class PokemonWs {
 
-
     @Autowired
     private PokemonService service;
 
@@ -20,23 +19,23 @@ public class PokemonWs {
         return service.getAllPokemon();
     }
 
-    @GetMapping("{name}")
-    public List<Pokemon> getAllPokemonByName(@PathVariable(name = "name") String nom){
-        return service.getAllPokemonByName(nom);
+    @GetMapping("{id}")
+    public Pokemon getPokemonById(@PathVariable(name = "id") Long id){
+        return service.getPokemonById(id);
     }
     @PostMapping
     public void createPokemon(@RequestBody Pokemon pokemon){
         service.createPokemon(pokemon);
     }
 
-    @PutMapping("{name}")
-    public void updatePokemon(@PathVariable(name = "name") String nom,
+    @PutMapping("{id}")
+    public void updatePokemon(@PathVariable(name = "id") Long id,
                               @RequestBody Pokemon pokemon){
-        service.updatePokemon(nom,pokemon);
+        service.updatePokemon(id,pokemon);
     }
 
-    @DeleteMapping("{name}")
-    public void deletePokemon(@PathVariable(name = "name") String nom){
-        service.deletePokemon(nom);
+    @DeleteMapping("{id}")
+    public void deletePokemon(@PathVariable(name = "id") Long id){
+        service.deletePokemon(id);
     }
 }
