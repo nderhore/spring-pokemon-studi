@@ -3,11 +3,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   datasource:
-    url: jdbc:postgresql://postgresql-nathand59.alwaysdata.net/nathand59_pokedex
-    username: nathand59_spring
-    password: toto&59560
+    url: jdbc:postgresql://hotebdd/bdd
+    username: aremplir
+    password: aremplir
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
+server:
+  port: 5001

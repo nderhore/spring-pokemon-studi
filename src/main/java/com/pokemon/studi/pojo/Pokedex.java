@@ -2,6 +2,8 @@ package com.pokemon.studi.pojo;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Entity
 @Table(name="Pokedex")
@@ -21,16 +23,17 @@ public class Pokedex {
     @Column(name="region")
     private String region;
 
-    @OneToMany(mappedBy = "pokedex")
-    private List<Pokemon> pokemonList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pokemon_id")
+    private Set<Pokemon> pokemonList = new LinkedHashSet<>();
 
 
-    public Pokedex(String region, List<Pokemon> pokemonList) {
+    public Pokedex(String region, Set<Pokemon> pokemonList) {
         this.region = region;
         this.pokemonList = pokemonList;
     }
 
-    public Pokedex(Long id, String region, List<Pokemon> pokemonList) {
+    public Pokedex(Long id, String region, Set<Pokemon> pokemonList) {
         this.id = id;
         this.region = region;
         this.pokemonList = pokemonList;
@@ -57,11 +60,11 @@ public class Pokedex {
         this.region = region;
     }
 
-    public List<Pokemon> getPokemonList() {
+    public Set<Pokemon> getPokemonList() {
         return pokemonList;
     }
 
-    public void setPokemonList(List<Pokemon> pokemonList) {
+    public void setPokemonList(Set<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
     }
 }

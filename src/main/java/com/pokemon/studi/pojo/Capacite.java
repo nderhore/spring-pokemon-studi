@@ -1,6 +1,10 @@
 package com.pokemon.studi.pojo;
 
+
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Capacite {
@@ -14,13 +18,12 @@ public class Capacite {
     @Column(name="capacite_id",updatable = false)
     private Long id;
 
+
     private String libelle;
 
     private Long puissance;
 
-    @ManyToOne
-    @JoinColumn(name="pokemon_id",nullable = false)
-    private Pokemon pokemon;
+
 
     public Capacite(Long id, String libelle, Long puissance) {
         this.id = id;
@@ -61,4 +64,16 @@ public class Capacite {
         this.puissance = puissance;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Capacite capacite = (Capacite) o;
+        return id != null && Objects.equals(id, capacite.id);
     }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+}

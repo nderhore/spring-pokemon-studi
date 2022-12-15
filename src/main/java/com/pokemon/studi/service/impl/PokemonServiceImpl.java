@@ -25,8 +25,13 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     public Pokemon getPokemonById(Long id) {
-        Optional<Pokemon> pokemonOptional = pokemonRepository.findById(id);
-        return pokemonOptional.orElse(null);
+            if(verifId(id)) {
+                Optional<Pokemon> pokemonOptional = pokemonRepository.findById(id);
+                return pokemonOptional.orElse(null);
+            }
+            else {
+                return null;
+            }
     }
 
     @Override
@@ -43,5 +48,9 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public void deletePokemon(Long id) {
         pokemonRepository.deleteById(id);
+    }
+
+    private boolean verifId(Long id){
+        return id != 0; //return True si id != 0 sinon, false
     }
 }
