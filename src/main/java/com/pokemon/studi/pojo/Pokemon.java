@@ -1,7 +1,9 @@
 package com.pokemon.studi.pojo;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Pokemon {
@@ -17,22 +19,28 @@ public class Pokemon {
 
     private String surname;
 
-    @ManyToOne
-    @JoinColumn(name = "pokedex_id",nullable = false)
-    private Pokedex pokedex;
 
-    @OneToMany(mappedBy = "pokemon")
-    private List<Capacite> capacitesList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pokemon_id")
+    private Set<Capacite> capacites = new LinkedHashSet<>();
+
+    public Set<Capacite> getCapacites() {
+        return capacites;
+    }
+
+    public void setCapacites(Set<Capacite> capacites) {
+        this.capacites = capacites;
+    }
 
     public Pokemon(Long id, String surname, List<Capacite> capacitesList) {
         this.id = id;
         this.surname = surname;
-        this.capacitesList = capacitesList;
+
     }
 
     public Pokemon(String surname, List<Capacite> capacitesList) {
         this.surname = surname;
-        this.capacitesList = capacitesList;
+
     }
 
     public Pokemon() {
@@ -54,11 +62,5 @@ public class Pokemon {
         this.surname = surname;
     }
 
-    public List<Capacite> getCapacitesList() {
-        return capacitesList;
-    }
 
-    public void setCapacitesList(List<Capacite> capacitesList) {
-        this.capacitesList = capacitesList;
-    }
 }
