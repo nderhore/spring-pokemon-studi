@@ -1,6 +1,7 @@
 package com.pokemon.studi.pojo;
 
 
+import com.pokemon.studi.constraint.CapaciteConstraint;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -18,12 +19,11 @@ public class Capacite {
     @Column(name="capacite_id",updatable = false)
     private Long id;
 
-
+    @CapaciteConstraint
     private String libelle;
 
+
     private Long puissance;
-
-
 
     public Capacite(Long id, String libelle, Long puissance) {
         this.id = id;

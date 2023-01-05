@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(ApiRegistration.REST_PREFIX + ApiRegistration.REST_POKEMON)
 public class PokemonWs {
 
@@ -17,12 +17,8 @@ public class PokemonWs {
     private PokemonService service;
 
     @GetMapping
-    public ModelAndView getAllPokemon(){
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("index.html");
-    modelAndView.addObject("test","test sucess");
-    return modelAndView;
-        //return service.getAllPokemon();
+    public List<Pokemon> getAllPokemon(){
+        return service.getAllPokemon();
     }
 
     @GetMapping("{id}")
